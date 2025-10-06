@@ -1,0 +1,148 @@
+.seccion-mensajes {
+  background: #fff;
+  padding: 38px 0 0 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ---- Fila principal: SIEMPRE dos columnas hasta móvil pequeño ---- */
+.mensajes-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.mensajes-textos {
+  flex: 1 1 0;
+  min-width: 280px;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0;
+}
+
+.mensajes-titulo {
+  font-family: 'MONT-BOLD', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #181829;
+  line-height: 1.13;
+  margin: 0 0 10px 0;
+  text-align: left;
+}
+
+.mensajes-desc {
+  font-family: 'MONT-REGULAR', sans-serif;
+  color: #222;
+  font-size: 1.3rem;
+  line-height: 1.28;
+  margin: 0;
+  text-align: left;
+}
+
+.mensajes-pc-img-area {
+  flex: 1 1 0;
+  min-width: 220px;
+  max-width: 480px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.mensajes-pc-img {
+  width: 100%;
+  max-width: 430px;
+  min-width: 130px;
+  display: block;
+  margin: 0;
+}
+
+/* Tarjetas y demo box */
+.mensajes-card-img, .demo-img {
+  display: block;
+  max-width: 900px;
+  width: 100%;
+  margin: 20px auto 0 auto;
+}
+
+.demo-img-box {
+  text-align: center;
+}
+
+/* ================== BREAKPOINTS ================== */
+
+/* Laptop/Tablet grande */
+@media (max-width: 1200px){
+  .mensajes-row{
+    grid-template-columns: minmax(300px, 1fr) minmax(260px, 1fr);
+  }
+  .mensajes-pc-img{ max-width: 480px; }
+}
+
+/* Tablet */
+@media (max-width: 992px){
+  .mensajes-row{
+    gap: clamp(14px, 3.5vw, 28px);
+  }
+  .mensajes-pc-img{ max-width: 440px; }
+}
+
+/* Móvil: 1 columna, todo centrado, texto más pequeño */
+@media (max-width: 700px){
+  .mensajes-row{
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .mensajes-textos{
+    align-items:center;
+    text-align:center;
+    padding-inline:12px;
+    gap:10px;
+  }
+  .mensajes-titulo{
+    text-align:center;
+    font-size: clamp(18px, 5.2vw, 24px);
+    line-height:1.2;
+    letter-spacing:-.3px;
+    margin:0 0 6px 0;
+  }
+  .mensajes-desc{
+    text-align:center;
+    font-size: clamp(12.5px, 3.8vw, 15px);
+    line-height:1.5;
+    max-width: 42ch;
+    margin:0 auto;
+    opacity:.95;
+    text-wrap: pretty;
+    overflow-wrap: anywhere;
+  }
+  .mensajes-pc-img{
+    max-width: min(520px, 92vw);
+    margin:14px auto 0;
+  }
+  .mensajes-card-img{
+    max-width: 99vw;
+    margin-bottom:8px;
+  }
+  .demo-img-box{ margin-top:20px; }
+  .demo-img{ max-width: 99vw; }
+}
+
+/* Móvil pequeño extra */
+@media (max-width: 360px){
+  .mensajes-titulo{ font-size: 18px; }
+  .mensajes-desc{ font-size: 12.5px; }
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce){
+  .seccion-mensajes *{ transition:none !important; }
+}

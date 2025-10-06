@@ -1,0 +1,148 @@
+/* ================== Hacer con NOVA ================== */
+.hacer-nova {
+  width: 100%;
+  background: #0f0f38;
+  padding: 20px 0 32px 0;
+}
+
+/* Contenedor seguro (si no usas Bootstrap) */
+.hacer-nova .container{
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding-inline: 16px;
+}
+
+/* Titulares fluidos (mejor lectura en móvil) */
+.hacer-nova-title {
+  color: #ffffff;
+  font-size: clamp(26px, 5vw, 45px);
+  line-height: 1.1;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+  font-family: 'MONT-BOLD', sans-serif;
+}
+
+.hacer-nova-subtitle {
+  color: #e2e2f7;
+  font-size: clamp(15px, 3.6vw, 30px);
+  line-height: 1.35;
+  text-align: center;
+  margin-bottom: 38px;
+  font-family: 'MONT-REGULAR', sans-serif;
+}
+
+/* ====== Grid de tarjetas ====== */
+.hacer-nova-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;            /* pequeño respiro entre columnas */
+}
+
+.hacer-nova-card-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 450px;         /* desktop */
+}
+
+.hacer-nova-card-col-left  { align-items: flex-start; margin-right: 10px; }
+.hacer-nova-card-col-right { align-items: flex-start; margin-left: 10px; }
+
+.hacer-nova-card {
+  width: 400px;         /* desktop */
+  max-width: 100%;
+  border-radius: 18px;
+  transition: transform 0.24s cubic-bezier(.2,.7,.4,1.2), box-shadow 0.21s;
+  background: transparent;
+  cursor: pointer;
+}
+
+@media (hover: hover){
+  .hacer-nova-card:hover {
+    transform: scale(1.05) translateY(-6px);
+    box-shadow: 0 10px 40px #d124e4, 0 4px 14px #ffb700;
+    z-index: 2;
+  }
+}
+
+@media (hover: none){
+  /* Evita “saltos” en táctiles */
+  .hacer-nova-card:hover { transform: none; box-shadow: none; }
+}
+
+/* Botón imagen */
+.btn-prueba-img {
+  width: 400px;
+  max-width: 90%;
+  margin: 36px auto 0 auto;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.19s cubic-bezier(.4,1,.5,1.2), box-shadow 0.22s cubic-bezier(.2,.7,.4,1.2);
+}
+@media (hover: hover){
+  .btn-prueba-img:hover {
+    transform: scale(1.045) translateY(-2px);
+    border-radius: 10px;
+    box-shadow: 0 8px 26px #d124e4;
+  }
+}
+
+/* ================== BREAKPOINTS ================== */
+
+/* Tablet horizontal ~ laptops chicos */
+@media (max-width: 1200px){
+  .hacer-nova-card-col { width: 420px; }
+  .hacer-nova-card     { width: 380px; }
+}
+
+/* Tablet / pantallas medianas */
+@media (max-width: 992px){
+  .hacer-nova-row { gap: 16px; }
+  .hacer-nova-card-col { width: 360px; }
+  .hacer-nova-card { width: 100%; }
+}
+
+/* MÓVIL: 1 tarjeta por fila */
+@media (max-width: 768px){
+  .hacer-nova { padding: 18px 0 28px; }
+
+  /* Stacking de columnas: una debajo de la otra */
+  .hacer-nova-row {
+    flex-direction: column;
+    align-items: center;      /* centra el stack */
+    gap: 14px;
+  }
+
+  .hacer-nova-card-col {
+    width: 100%;
+    max-width: 620px;         /* ancho cómodo en móvil grande */
+    align-items: center;
+    gap: 14px;
+    margin: 0;                /* quita márgenes laterales */
+  }
+
+  /* Cada tarjeta ocupa todo el ancho del contenedor */
+  .hacer-nova-card {
+    width: 100%;
+    border-radius: 16px;
+  }
+
+  .btn-prueba-img { width: min(520px, 92%); }
+}
+
+/* Móvil pequeño */
+@media (max-width: 480px){
+  .hacer-nova { padding: 14px 0 24px; }
+  .hacer-nova-title { letter-spacing: -.5px; }
+  .hacer-nova-card  { border-radius: 14px; }
+}
+
+/* Accesibilidad: menos animaciones si el usuario lo pide */
+@media (prefers-reduced-motion: reduce){
+  .hacer-nova *{
+    transition: none !important;
+  }
+}

@@ -1,0 +1,78 @@
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import '../styles/navbar.css';
+import '../styles/grid.css';
+import logo from '../assets/navBar/Logo-NOVA.png';
+import btngratuita from '../assets/navBar/Prueba-Gratuita.png';
+
+function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const closeMenu = () => setMenuOpen(false);
+
+  return (
+    <nav className="main-navbar">
+      <div className="container">
+        <div className="row" style={{ alignItems: 'center', minHeight: '84px', position: 'relative' }}>
+          <div className="col-3 navbar-logo">
+            <img src={logo} alt="Nova Logo" />
+          </div>
+          {/* Hamburguesa */}
+          <button
+            className={`navbar-burger${menuOpen ? ' open' : ''}`}
+            aria-label="Abrir menú"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+          {/* Menú central */}
+          <div className={`navbar-menu-wrapper${menuOpen ? ' open' : ''}`}>
+            <ul className="navbar-menu">
+              <li>
+                <Link
+                  to="/"
+                  className={location.pathname === '/' ? 'active' : ''}
+                  onClick={closeMenu}
+                >Inicio</Link>
+              </li>
+              <li>
+                <Link
+                  to="/manuales"
+                  className={location.pathname === '/manuales' ? 'active' : ''}
+                  onClick={closeMenu}
+                >Manuales / Ayuda</Link>
+              </li>
+              <li>
+                <Link
+                  to="/contacto"
+                  className={location.pathname === '/contacto' ? 'active' : ''}
+                  onClick={closeMenu}
+                >Contactanos</Link>
+              </li>
+              {/* Botón Prueba Gratuita en móvil */}
+              {/* Botón Prueba Gratuita en móvil (con Link para evitar recarga) */}
+              <li className="navbar-menu-btn-mobile">
+                <Link to="/registro" onClick={closeMenu} aria-label="Prueba Gratuita">
+                  <img
+                    src={btngratuita}
+                    alt="Prueba Gratuita"
+                    className="navbar-btn-mobile-img"
+                  />
+                </Link>
+              </li>
+            </ul>
+          </div>
+          {/* Botón Prueba Gratuita (solo visible en desktop) */}
+         <div className="col-3 navbar-right">
+          <Link to="/registro" onClick={() => setMenuOpen(false)}>
+            <img src={btngratuita} alt="Prueba Gratuita" />
+          </Link>
+        </div>
+        </div>
+      </div>
+    </nav>
+  );
+}
+export default Navbar;

@@ -1,0 +1,171 @@
+/* ========= Tokens locales (acotados a .rn-section) ========= */
+.rn-section{
+  --bg:#0f0f38;
+  --card:#ffffff;
+  --ink:#1c1c3c;
+  --muted:#6b6b8f;
+  --border:#e8e3fb;
+  --field:#f7f6ff;
+  --radius:18px;
+  --ring:#b9a8ff;
+  --ring-soft:rgba(185,168,255,.28);
+  --shadow:0 24px 60px rgba(17,12,46,.22);
+  --grad:linear-gradient(135deg,#7a2cff,#ff4dbc 45%,#ffb700);
+  /* Altura combinada TopBanner + Navbar (ajústala si cambia) */
+  --header-h: 200px;
+
+  /* Fondo y layout base (sin tocar html/body) */
+  background:var(--bg);
+  min-height: calc(100svh - var(--header-h));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding-block: clamp(16px, 2vh, 32px);
+  padding-inline: 16px;
+}
+
+/* ========= Layout interno ========= */
+.rn-section .rn-wrap{
+  max-width:1100px;
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px;
+  align-items:stretch;
+}
+
+/* Panel izquierdo */
+.rn-section .rn-left{
+  border-radius:var(--radius);
+  padding:28px 28px;
+  color:#e6e6ff;
+  background:
+    linear-gradient(#121238,#121238) padding-box,
+    linear-gradient(135deg, rgba(122,44,255,.35), rgba(255,77,188,.25)) border-box;
+  border:1px solid transparent;
+  box-shadow:0 12px 34px rgba(0,0,0,.18);
+  display:flex; flex-direction:column; justify-content:center;
+}
+.rn-section .rn-logo{ width: clamp(160px, 46%, 260px); height:auto; margin-bottom:12px; }
+.rn-section .rn-left-sub{ font-family:'MONT-REGULAR', sans-serif; font-size:16px; opacity:.92; margin:0; }
+.rn-section .rn-left-title{ font-family:'MONT-BOLD', sans-serif; font-size:32px; line-height:1.15; margin:0 0 8px; color:#fff; letter-spacing:-.3px; }
+
+/* Card del formulario */
+.rn-section .rn-card{
+  background:var(--card); color:var(--ink);
+  border-radius:var(--radius);
+  padding:26px 24px;
+  box-shadow:var(--shadow);
+  display:flex; flex-direction:column; justify-content:center;
+}
+.rn-section .rn-title{ font-family:'MONT-BOLD', sans-serif; font-size:30px; line-height:1.12; margin:0 0 6px; color:var(--ink); letter-spacing:-.2px; }
+.rn-section .rn-sub{ color:var(--muted); margin:0 0 18px; }
+
+/* ========= Campos ========= */
+.rn-section .rn-form{ display:flex; flex-direction:column; gap:14px; }
+.rn-section .rn-field{ display:flex; flex-direction:column; gap:8px; font-size:14px; color:#404064; }
+.rn-section .rn-field > span{ font-family:'MONT-REGULAR', sans-serif; }
+
+.rn-section .rn-field input,
+.rn-section .rn-field select{
+  height:50px;
+  background:var(--field);
+  color:var(--ink);
+  border:1.6px solid var(--border);
+  border-radius:12px;
+  padding:0 14px;
+  font-size:16px;
+  outline:none;
+  transition:border-color .18s, box-shadow .18s, background-color .18s;
+  -webkit-appearance:none; appearance:none;
+}
+.rn-section .rn-field input::placeholder{ color:#98a0b3; }
+.rn-section .rn-field input:focus,
+.rn-section .rn-field select:focus{
+  border-color:var(--ring);
+  box-shadow:0 0 0 4px var(--ring-soft);
+  background:#fff;
+}
+
+/* Grupo con sufijo (.novaisp.co) – si lo usas */
+.rn-section .rn-input-group{ display:flex; align-items:stretch; }
+.rn-section .rn-input-group input{
+  border-top-right-radius:0; border-bottom-right-radius:0; flex:1;
+}
+.rn-section .rn-suffix{
+  display:flex; align-items:center; padding:0 12px;
+  background:#f1effd; color:#6b6b8f;
+  border:1.6px solid var(--border);
+  border-left:0;
+  border-top-right-radius:12px; border-bottom-right-radius:12px;
+  font-size:15px; white-space:nowrap;
+}
+
+/* Botón */
+.rn-section .rn-btn{
+  margin-top:6px;
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:50px; padding:0 20px;
+  border:0; border-radius:999px;
+  background:var(--grad);
+  color:#fff; font-weight:800; letter-spacing:.3px; font-size:15px;
+  cursor:pointer;
+  transition:transform .16s, box-shadow .16s, filter .16s;
+}
+.rn-section .rn-btn:hover{ transform:translateY(-1px); box-shadow:0 12px 28px rgba(122,44,255,.35); }
+.rn-section .rn-btn:active{ transform:translateY(0) scale(.99); }
+.rn-section .rn-btn:disabled{ opacity:.65; cursor:default; filter:grayscale(.15); }
+
+/* Mensajes */
+.rn-section .rn-msg{ padding:10px 12px; border-radius:10px; font-size:14px; }
+.rn-section .rn-err{ background:#ffe9ea; color:#a01028; border:1px solid #ffc6cc; }
+.rn-section .rn-ok{ background:#e8ffe9; color:#0a7a1f; border:1px solid #c7f1cc; }
+
+/* Honeypot oculto */
+.rn-section .rn-hp{ position:absolute; left:-9999px; top:-9999px; height:0; width:0; opacity:0; }
+
+/* Si enlazas a #registro-nova desde otra parte, compensa navbar fijo */
+#registro-nova{ scroll-margin-top: 90px; }
+
+/* ========= Autofill ========= */
+.rn-section .rn-field input:-webkit-autofill,
+.rn-section .rn-field select:-webkit-autofill{
+  -webkit-text-fill-color:var(--ink);
+  -webkit-box-shadow:0 0 0 1000px var(--field) inset;
+  transition:background-color 9999s ease-out;
+}
+
+/* ========= Ajustes por pantallas bajas ========= */
+@media (max-height: 820px){
+  .rn-section .rn-left{ padding:22px; }
+  .rn-section .rn-card{ padding:20px; }
+  .rn-section .rn-title{ font-size: clamp(22px, 3.5vh, 28px); }
+  .rn-section .rn-field input, .rn-section .rn-field select{ height:46px; }
+  .rn-section .rn-btn{ min-height:46px; }
+  .rn-section .rn-wrap{ gap:22px; }
+}
+
+@media (max-height: 680px){
+  .rn-section .rn-left{ padding:18px; }
+  .rn-section .rn-card{ padding:18px; }
+  .rn-section .rn-form{ gap:12px; }
+  .rn-section .rn-left-sub{ font-size:15px; }
+}
+
+/* ========= Responsive ancho ========= */
+@media (max-width: 980px){
+  .rn-section .rn-wrap{ grid-template-columns:1fr; gap:20px; }
+  .rn-section .rn-left{ order:2; }
+  .rn-section .rn-card{ order:1; }
+}
+@media (max-width: 640px){
+  .rn-section{ padding-inline: 12px; }
+  .rn-section .rn-card{ padding:18px; border-radius:16px; }
+  .rn-section .rn-left{ padding:18px; }
+  .rn-section .rn-title{ font-size:26px; }
+}
+
+/* Reduce animaciones si el usuario lo pide */
+@media (prefers-reduced-motion: reduce){
+  .rn-section *{ transition:none !important; }
+}

@@ -1,0 +1,124 @@
+.seccion-gestion {
+  background: url('../assets/bot/BG-morado.png') no-repeat center center/cover;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.row.align-items-center {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  align-items: center;
+  
+}
+
+.seccion-gestion-col {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 50px;
+}
+
+.seccion-gestion-imgbox {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;
+}
+.imgbox-izq { justify-content: flex-end; }
+.imgbox-der { justify-content: flex-start; }
+
+.seccion-gestion-texto {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 600px;
+  max-width: 700px;
+  padding: 0 18px;
+}
+.gestion-texto-izq { 
+  align-items: flex-start; 
+  text-align: left;  
+  margin-left: 100px;
+}
+.gestion-texto-der { 
+  align-items: flex-start; 
+  text-align: left;  
+  margin-right: 100px;
+}
+
+.img-mano-celular{
+  width: 100%;
+  max-width: 500px;
+}
+
+.img-laptop-nube {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.gestion-titulo {
+  font-family: 'MONT-BOLD', sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  margin-bottom: 10px;
+  color: white;
+}
+.gestion-desc {
+  font-family: 'MONT-REGULAR', sans-serif;
+  font-size: 20px;
+  line-height: 1.38;
+  color: white;
+}
+
+
+
+/* CELULAR: Mantener dos columnas mientras se pueda */
+@media (max-width: 1100px) {
+  .seccion-gestion-col {
+    gap: 7px;
+    min-height: 110px;
+  }
+  .seccion-gestion-imgbox {
+    max-width: 80%;
+    min-width: 30%;
+  }
+  .seccion-gestion-texto {
+    max-width: 100%;
+    min-width: 60%;
+  }
+  .gestion-titulo { font-size: 13px; }
+  .gestion-desc { font-size: 10px; }
+}
+
+/* MOBILE PEQUEÑO: Ya no caben dos columnas, apilar */
+@media (max-width: 520px) {
+  .row.align-items-center {
+    gap: 20px;
+  }
+  .seccion-gestion-col {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 60px;
+  }
+  .seccion-gestion-imgbox,
+  .seccion-gestion-texto {
+    max-width: 99vw;
+    min-width: 0;
+    margin: 0;
+    padding: 0 2vw;
+  }
+  .gestion-titulo { font-size: 11px; }
+  .gestion-desc { font-size: 8px; }
+}
+
+
