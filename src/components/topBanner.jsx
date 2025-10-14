@@ -1,4 +1,4 @@
-import '../styles/topBanner.css'
+import '../styles/topbanner.css'
 
 export function TopBanner() {
   return (

@@ -7,11 +7,11 @@ export function ContactoPage() {
       {/* HERO */}
       <section className="contacto-hero">
         <div className="contacto-hero-content">
-          <h1>Contactanos</h1>
+          <h1>Contáctanos</h1>
           <div className="contacto-breadcrumb">
             <span>Inicio</span>
             <span className="contacto-breadcrumb-sep">{'»'}</span>
-            <span>Contactanos</span>
+            <span>Contáctanos</span>
           </div>
         </div>
         {/* Puedes agregar SVG decorativos como en tu imagen */}
@@ -57,7 +57,7 @@ export function ContactoPage() {
             <div className="contacto-card-title">Visita nuestras instalaciones</div>
             <div className="contacto-card-desc">Visítanos en nuestras instalaciones</div>
             <div className="contacto-card-data">
-              <b>Cra 15 # 15–13, Santa Rosa de<br />Cabal – Colombia</b>
+              <b>Cra 15 # 15–09, Santa Rosa de<br />Cabal – Colombia</b>
             </div>
           </div>
           {/* CARD 3 */}

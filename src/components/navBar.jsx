@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import '../styles/navbar.css';
+import '../styles/navBar.css';
 import '../styles/grid.css';
 import logo from '../assets/navBar/Logo-NOVA.png';
 import btngratuita from '../assets/navBar/Prueba-Gratuita.png';
@@ -49,7 +49,7 @@ function Navbar() {
                   to="/contacto"
                   className={location.pathname === '/contacto' ? 'active' : ''}
                   onClick={closeMenu}
-                >Contactanos</Link>
+                >Contáctanos</Link>
               </li>
               {/* Botón Prueba Gratuita en móvil */}
               {/* Botón Prueba Gratuita en móvil (con Link para evitar recarga) */}
@@ -66,7 +66,7 @@ function Navbar() {
           </div>
           {/* Botón Prueba Gratuita (solo visible en desktop) */}
          <div className="col-3 navbar-right">
-          <Link to="/registro" onClick={() => setMenuOpen(false)}>
+          <Link to="/expo2025" onClick={() => setMenuOpen(false)}>
             <img src={btngratuita} alt="Prueba Gratuita" />
           </Link>
         </div>

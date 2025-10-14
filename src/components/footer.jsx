@@ -54,7 +54,7 @@ return (
             <div className="col-3 footer-links">
               <div className="footer-title">Ayuda y soporte</div>
               <ul>
-                <li>Contactanos</li>
+                <li>Contáctanos</li>
                 <li>Preguntas frecuentes</li>
                 <li>Trabaja con nosotros</li>
                 <li>Términos y condiciones</li>
@@ -63,10 +63,10 @@ return (
             </div>
             {/* Columna 4: Contacto */}
             <div className="col-3 footer-contact">
-              <div className="footer-title">Contactanos</div>
+              <div className="footer-title">Contáctanos</div>
               <div className="footer-contact-item">
                 <span className="footer-contact-icon">📍</span>
-                Cra 15 # 15–13<br />Santa Rosa de cabal - Colombia
+                Cra 15 # 15–09<br />Santa Rosa de cabal - Colombia
               </div>
               <div className="footer-contact-item"> <span className="footer-contact-icon">📞</span> Llámanos<br />+57–320–5005001 </div>
               <div className="footer-contact-item">

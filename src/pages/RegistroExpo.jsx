@@ -1,25 +1,50 @@
 // src/pages/RegistroNova.jsx
-import { useState } from "react";
+import {useState} from "react";
 import "../styles/registroNova.css";
 import logo from "../assets/navBar/Logo-NOVA.png";
-import { Footer } from "../components/footer";
-
+import {Footer} from "../components/footer";
+import axios from "axios"
 // Códigos válidos (ajústalos cuando quieras)
-const VALID_PROMOS = new Set(["NOVAEXPO", "NOVASIGO"]);
+const VALID_PROMOS = new Set(["NOVAEXPO"]);
 
 // 🔌 Punto ÚNICO de integración:
 // Reemplaza el contenido de esta función por tu integración real (EmailJS / API).
 async function submitLead(payload) {
-  // Ejemplo para conectar luego:
-  // return await sendNovaForm(payload);
-  // Por ahora simulamos éxito:
-  await new Promise((r) => setTimeout(r, 500));
+  try {
+    const res = await axios.post('https://cluster.novaisp.co/api/v1/public/company/fastSignup', {
+      phone: payload.telefono,
+      promo: payload.promo
+    })
+  } catch (err) {
+    alert('No se pudo iniciar el registro. Intenta nuevamente')
+  }
 }
 
-export function RegistroPage() {
+export function RegistroExpo() {
   const [loading, setLoading] = useState(false);
   const [ok, setOk] = useState(false);
   const [err, setErr] = useState("");
+
+  // --- Helpers para el keypad (no cambian la estructura visual) ---
+  function getTelefonoInput() {
+    return document.querySelector('input[name="telefono"]');
+  }
+
+  function appendDigit(d) {
+    const input = getTelefonoInput();
+    if (!input) return;
+    input.value = (input.value || "") + d;
+    input.focus();
+  }
+
+  function backspace() {
+    const input = getTelefonoInput();
+    if (!input) return;
+    input.value = (input.value || "").slice(0, -1);
+    input.focus();
+  }
+
+  // --- fin helpers ---
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -44,14 +69,6 @@ export function RegistroPage() {
       return;
     }
 
-    // ✅ Validación promo: obligatoria y válida
-    const promoNorm = payload.promo.toUpperCase();
-    if (!VALID_PROMOS.has(promoNorm)) {
-      setLoading(false);
-      setErr("Código promocional inválido. Usa NOVAEXPO o NOVASIGO.");
-      return;
-    }
-
     // 🕷️ Honeypot: si viene relleno, asumimos bot y finalizamos en “ok”
     if (payload.hp) {
       setLoading(false);
@@ -61,7 +78,7 @@ export function RegistroPage() {
     }
 
     try {
-      await submitLead({ telefono: payload.telefono, promo: promoNorm });
+      await submitLead({telefono: payload.telefono, promo: ''});
       form.reset?.();
       setOk(true);
     } catch (e2) {
@@ -77,18 +94,27 @@ export function RegistroPage() {
         <div className="rn-wrap">
           {/* Panel izquierdo */}
           <div className="rn-left">
-            <img src={logo} alt="Nova Logo" className="rn-logo" />
-            <p className="rn-left-sub">
-              Nova gestión total, la herramienta más completa y potente para la
-              gestión de tu ISP.
-            </p>
+            <div className="keypad-container">
+              <div className="keypad" role="button" tabIndex={0} onClick={() => appendDigit("1")}>1</div>
+              <div className="keypad" role="button" tabIndex={0} onClick={() => appendDigit("2")}>2</div>
+              <div className="keypad" role="button" tabIndex={0} onClick={() => appendDigit("3")}>3</div>
+              <div className="keypad" role="button" tabIndex={0} onClick={() => appendDigit("4")}>4</div>
+              <div className="keypad" role="button" tabIndex={0} onClick={() => appendDigit("5")}>5</div>
+              <div className="keypad" role="button" tabIndex={0} onClick={() => appendDigit("6")}>6</div>
+              <div className="keypad" role="button" tabIndex={0} onClick={() => appendDigit("7")}>7</div>
+              <div className="keypad" role="button" tabIndex={0} onClick={() => appendDigit("8")}>8</div>
+              <div className="keypad" role="button" tabIndex={0} onClick={() => appendDigit("9")}>9</div>
+              <div className="keypad" role="button" tabIndex={0} onClick={() => appendDigit("+")}>+</div>
+              <div className="keypad" role="button" tabIndex={0} onClick={() => appendDigit("0")}>0</div>
+              <div className="keypad keypad-delete" role="button" tabIndex={0} onClick={backspace}>⌫</div>
+            </div>
           </div>
 
           {/* Formulario (solo teléfono y promo) */}
           <div className="rn-card">
             <h3 className="rn-title">
               Descubre las herramientas
-              <br /> que Nova tiene para ti
+              <br/> que Nova tiene para ti
             </h3>
             <p className="rn-sub">prueba nuestro software por 30 días sin costo</p>
 
@@ -107,27 +133,15 @@ export function RegistroPage() {
                 <input
                   name="telefono"
                   inputMode="tel"
-                  placeholder="+57 300 123 4567"
+                  placeholder="300 123 4567"
                   required
-                />
-              </label>
-
-              <label className="rn-field">
-                <span>Código promocional (obligatorio)</span>
-                <input
-                  name="promo"
-                  placeholder="NOVAEXPO"
-                  required
-                  onInput={(e) => {
-                    e.currentTarget.value = e.currentTarget.value.toUpperCase();
-                  }}
                 />
               </label>
 
               {err && <div className="rn-msg rn-err">{err}</div>}
               {ok && (
                 <div className="rn-msg rn-ok">
-                  ¡Listo! Enviado correctamente. Te contactaremos al número registrado.
+                  ¡Listo! Enviado correctamente. continua tu proceso en el chat del número registrado.
                 </div>
               )}
 

@@ -14,6 +14,7 @@ import { NovaManualGrowPage } from "./pages/manuales/migracion";
 import { AsistenteIaManualPage } from "./pages/manuales/IadeNova";
 import { CortesAutoManualPage } from "./pages/manuales/automatizacion-cortes";
 import { MetricsManualPage } from "./pages/manuales/metricas-dashboard";
+import {RegistroExpo} from "./pages/RegistroExpo.jsx";
 
 function MotionWrap({ children }) {
   return (
@@ -44,6 +45,7 @@ function AnimatedRoutes() {
         <Route path="/manuales/metricas-dashboard" element={<MotionWrap><MetricsManualPage /></MotionWrap>} />
         <Route path="/registro" element={<MotionWrap><RegistroPage /></MotionWrap>} />
         <Route path="/contacto" element={<MotionWrap><ContactoPage /></MotionWrap>} />
+        <Route path="/expo2025" element={<MotionWrap><RegistroExpo /></MotionWrap>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AnimatePresence>
