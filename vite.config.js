@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite'
+import {defineConfig} from 'vite'
 import react from '@vitejs/plugin-react'
-import { readFileSync, writeFileSync } from 'node:fs'
-import { resolve } from 'node:path'
+import {readFileSync, writeFileSync} from 'node:fs'
+import {resolve} from 'node:path'
 
 function emit404ForGhPages() {
   return {
@@ -23,4 +23,11 @@ function emit404ForGhPages() {
 export default defineConfig({
   plugins: [react(), emit404ForGhPages()],
   base: '/', // <<-- tu base en raíz
+  resolve: {
+    alias: {
+      assets: resolve(__dirname, './src/assets'),
+      styles: resolve(__dirname, './src/styles'),
+      '@': resolve(__dirname, './src'),
+    },
+  },
 })

@@ -1,83 +1,48 @@
 // src/pages/RegistroNova.jsx
-import { useState } from "react";
+import {useState} from "react";
 import "../styles/registroNova.css";
 import logo from "../assets/navBar/Logo-NOVA.png";
-import { Footer } from "../components/footer";
+import {useFormik} from "formik"
+import Axios from "axios"
+import {useGoogleReCaptcha} from "@google-recaptcha/react";
 
-// Códigos válidos (ajústalos cuando quieras)
-const VALID_PROMOS = new Set(["NOVAEXPO", "NOVASIGO"]);
-
-// 🔌 Punto ÚNICO de integración:
-// Reemplaza el contenido de esta función por tu integración real (EmailJS / API).
-async function submitLead(payload) {
-  // Ejemplo para conectar luego:
-  // return await sendNovaForm(payload);
-  // Por ahora simulamos éxito:
-  await new Promise((r) => setTimeout(r, 500));
-}
 
 export function RegistroPage() {
-  const [loading, setLoading] = useState(false);
-  const [ok, setOk] = useState(false);
-  const [err, setErr] = useState("");
+  const axios = Axios.create({baseURL: 'https://cluster.novaisp.co/api/v1/public/company'})
+  const googleReCaptcha = useGoogleReCaptcha();
+  //const axios = Axios.create({baseURL: 'http://localhost:8880/api/v1/public/company'})
+  const [result, setResult] = useState({});
 
-  async function onSubmit(e) {
-    e.preventDefault();
-    const form = e.currentTarget;
-
-    setLoading(true);
-    setErr("");
-    setOk(false);
-
-    const fd = new FormData(form);
-    const payload = {
-      telefono: fd.get("telefono")?.toString().trim() || "",
-      promo: fd.get("promo")?.toString().trim() || "",
-      hp: fd.get("website")?.toString() || "", // honeypot anti-bots
-    };
-
-    // ✅ Validación teléfono: al menos 7 dígitos
-    const digitsCount = (payload.telefono.match(/\d/g) || []).length;
-    if (digitsCount < 7) {
-      setLoading(false);
-      setErr("Teléfono inválido. Debe contener al menos 7 dígitos.");
-      return;
+  const formik = useFormik({
+    initialValues: {
+      nit: '',
+      domain: '',
+      businessName: '',
+      email: '',
+      phone: '',
+      customerName: '',
+      notes: ''
+    },
+    onSubmit: async (values) => {
+      try {
+        const token = await googleReCaptcha.executeV3('signup');
+        const res = await axios.post('/create', {token, ...values})
+        formik.resetForm()
+        setResult(res.data)
+      } catch (err) {
+        setResult(err.response.data)
+      }
     }
-
-    // ✅ Validación promo: obligatoria y válida
-    const promoNorm = payload.promo.toUpperCase();
-    if (!VALID_PROMOS.has(promoNorm)) {
-      setLoading(false);
-      setErr("Código promocional inválido. Usa NOVAEXPO o NOVASIGO.");
-      return;
-    }
-
-    // 🕷️ Honeypot: si viene relleno, asumimos bot y finalizamos en “ok”
-    if (payload.hp) {
-      setLoading(false);
-      form.reset?.();
-      setOk(true);
-      return;
-    }
-
-    try {
-      await submitLead({ telefono: payload.telefono, promo: promoNorm });
-      form.reset?.();
-      setOk(true);
-    } catch (e2) {
-      setErr(e2?.message || "No se pudo enviar. Intenta de nuevo.");
-    } finally {
-      setLoading(false);
-    }
-  }
+  })
 
   return (
+
     <main>
       <section id="registro-nova" className="rn-section">
         <div className="rn-wrap">
           {/* Panel izquierdo */}
           <div className="rn-left">
-            <img src={logo} alt="Nova Logo" className="rn-logo" />
+            <img src={logo} alt="Nova Logo" className="rn-logo"/>
             <p className="rn-left-sub">
               Nova gestión total, la herramienta más completa y potente para la
               gestión de tu ISP.
@@ -88,51 +53,108 @@ export function RegistroPage() {
           <div className="rn-card">
             <h3 className="rn-title">
               Descubre las herramientas
-              <br /> que Nova tiene para ti
+              <br/> que Nova tiene para ti
             </h3>
             <p className="rn-sub">prueba nuestro software por 30 días sin costo</p>
 
-            <form onSubmit={onSubmit} className="rn-form" noValidate>
-              {/* Honeypot (oculto) */}
-              <input
-                type="text"
-                name="website"
-                tabIndex={-1}
-                autoComplete="off"
-                className="rn-hp"
-              />
+            <form className="rn-form" noValidate>
 
+              <label className="rn-field">
+                <span>Nombre de la Empresa</span>
+                <input
+                  name="businessName"
+                  inputMode="text"
+                  placeholder="Mi Empresa S.A.S"
+                  required
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.businessName}
+                />
+              </label>
+              <label className="rn-field">
+                <span>NIT</span>
+                <input
+                  name="nit"
+                  inputMode="numeric"
+                  placeholder="901000000"
+                  required
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.nit}
+                />
+              </label>
               <label className="rn-field">
                 <span>Teléfono</span>
                 <input
-                  name="telefono"
+                  name="phone"
                   inputMode="tel"
-                  placeholder="+57 300 123 4567"
+                  placeholder="3001234567"
                   required
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.phone}
                 />
               </label>
-
               <label className="rn-field">
-                <span>Código promocional (obligatorio)</span>
+                <span>E-mail</span>
                 <input
-                  name="promo"
-                  placeholder="NOVAEXPO"
+                  name="email"
+                  inputMode="email"
+                  placeholder="email@miempresa.com"
                   required
-                  onInput={(e) => {
-                    e.currentTarget.value = e.currentTarget.value.toUpperCase();
-                  }}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
+                />
+              </label>
+              <label className="rn-field">
+                <span>Persona de contacto</span>
+                <input
+                  name="customerName"
+                  inputMode="text"
+                  placeholder="Pedro Perez"
+                  required
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.customerName}
+                />
+              </label>
+              <label className="rn-field">
+                <span>Selecciona tu sub-dominio</span>
+                <div className="rn-input-group">
+                  <input
+                    name="domain"
+                    inputMode="text"
+                    placeholder="miempresa"
+                    required
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.domain}
+                  />
+                  <div className="rn-suffix">.novaisp.co</div>
+                </div>
+              </label>
+              <label className="rn-field">
+                <span>Notas adicionales</span>
+                <input
+                  name="notes"
+                  inputMode="text"
+                  placeholder=""
+                  required
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.notes}
                 />
               </label>
 
-              {err && <div className="rn-msg rn-err">{err}</div>}
-              {ok && (
+              {result.result === 'error' && <div className="rn-msg rn-err">{result.error}</div>}
+              {result.result === 'success' && (
                 <div className="rn-msg rn-ok">
-                  ¡Listo! Enviado correctamente. Te contactaremos al número registrado.
+                  {result.message}
                 </div>
               )}
-
-              <button className="rn-btn" disabled={loading}>
-                {loading ? "ENVIANDO..." : "SOLICITAR PRUEBA GRATUITA ↗"}
+              <button type={'button'} className="rn-btn" disabled={formik.isSubmitting} onClick={formik.submitForm}>
+                {formik.isSubmitting ? "ENVIANDO..." : "SOLICITAR PRUEBA GRATUITA ↗"}
               </button>
             </form>
           </div>
@@ -140,7 +162,6 @@ export function RegistroPage() {
         </div>
 
       </section>
-
     </main>
 
   );

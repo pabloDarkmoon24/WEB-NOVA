@@ -66,7 +66,7 @@ function Navbar() {
           </div>
           {/* Botón Prueba Gratuita (solo visible en desktop) */}
          <div className="col-3 navbar-right">
-          <Link to="/expo2025" onClick={() => setMenuOpen(false)}>
+          <Link to="/registro" onClick={() => setMenuOpen(false)}>
             <img src={btngratuita} alt="Prueba Gratuita" />
           </Link>
         </div>
