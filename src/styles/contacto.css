@@ -5,7 +5,7 @@
 
 /* HERO */
 .contacto-hero {
-  width: 100vw;
+  width: 100%;  /* ← CAMBIO: era 100vw, ahora 100% */
   background: linear-gradient(180deg, #171749 0%, #181633 100%);
   min-height: 200px;
   display: flex;
@@ -93,6 +93,8 @@
   font-weight: 700;
   color: #2d166d;
   margin-top: 10px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 .contacto-card-phone {
   font-weight: 700;
@@ -108,8 +110,14 @@
 }
 
 @media (max-width: 900px) {
-  .contacto-cards-grid { grid-template-columns: 1fr; gap: 24px; }
-  .contacto-card { max-width: 420px; margin: 0 auto; }
+  .contacto-cards-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .contacto-card {
+    width: min(420px, 92vw);
+    margin: 0;
+  }
 }
 
 @media (max-width: 600px) {
@@ -118,32 +126,11 @@
   .contacto-breadcrumb { font-size: 11px; }
   .contacto-cards-section { padding: 18px 0 26px 0; }
   .contacto-cards-grid { gap: 13px; padding: 0 2vw; }
-  .contacto-card { padding: 19px 3vw 15px 3vw; }
+  .contacto-card { 
+    padding: 19px 3vw 15px 3vw;
+    width: min(420px, 94vw);
+  }
   .contacto-card-title { font-size: 1.06rem; }
   .contacto-card-desc, .contacto-card-data { font-size: 0.92rem; }
   .contacto-icon { width: 54px; height: 54px; margin-bottom: 9px; }
-} 
-@media (max-width: 900px){
-  .contacto-cards-grid{
-    grid-template-columns: 1fr;
-    justify-items: center;         /* centra cada ítem del grid */
-  }
-  .contacto-card{
-    width: min(420px, 92vw);       /* MISMO ancho para todas */
-    margin: 0;                     /* en grid ya no hace falta auto */
-  }
-}
-
-/* 2) Móvil pequeño: un pelín más de respiro */
-@media (max-width: 600px){
-  .contacto-card{
-    width: min(420px, 94vw);
-  }
-}
-
-/* 3) Evitar que textos largos desformen la primera card */
-.contacto-card-email,
-.contacto-card-phone{
-  overflow-wrap: anywhere;         /* rompe cadenas largas (emails) */
-  word-break: break-word;
 }

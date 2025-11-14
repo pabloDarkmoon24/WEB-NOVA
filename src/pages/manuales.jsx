@@ -24,23 +24,33 @@ export function ManualPage() {
     <div className="ayuda-main">
       <section className="ayuda-hero">
         <div className="ayuda-hero-content">
-          <h1>Ayuda</h1>
+          <h1>MANUALES Y AYUDA</h1>
           <div className="ayuda-breadcrumb">
-            <span>Inicio</span>
+            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <span>Inicio</span>
+            </Link>
             <span className="ayuda-breadcrumb-sep">»</span>
             <span>Ayuda</span>
           </div>
         </div>
       </section>
 
+      {/* SECCIÓN UNIFICADA */}
       <section className="ayuda-manuales-section">
-        <h2>
-          <span className="ayuda-titulo-principal">AYUDA</span>
-          <span> – Manuales</span>
-        </h2>
-        <p className="ayuda-subtitle">Encuentra los manuales para el uso de nuestra herramienta</p>
+        <p className="ayuda-subtitle">Documentación completa y guías de uso de NOVA</p>
 
         <div className="ayuda-manuales-list">
+          <Link to="/manuales/introduccion" className="manual-link-card">
+            <div className="mlc-left">
+              <div className="mlc-icon">📖</div>
+              <div>
+                <div className="mlc-title">Introducción a Nova</div>
+                <div className="mlc-desc">Conoce todo sobre NOVA y sus funcionalidades.</div>
+              </div>
+            </div>
+            <div className="mlc-arrow">→</div>
+          </Link>
+
           <Link to="/manuales/primeros-pasos" className="manual-link-card">
             <div className="mlc-left">
               <div className="mlc-icon">📘</div>
@@ -63,7 +73,6 @@ export function ManualPage() {
             <div className="mlc-arrow">→</div>
           </Link>
 
-          {/* IMPORTANTE: en minúsculas */}
           <Link to="/manuales/migracion" className="manual-link-card">
             <div className="mlc-left">
               <div className="mlc-icon">🚀</div>
