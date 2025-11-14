@@ -5,7 +5,7 @@ import "../../styles/manualNova.css";
 
 export function ChatPage() {
   // ID extraído del link de Google Drive
-  const videoId = "1XoVPqKz9GUu3XAiKUkg-r_AIuk0Cl1fU"; 
+  const videoId = "1L_mvorgJbjrkYcAE8O26YDosUtjjRCWw"; 
 
   return (
     <main className="nova-article">

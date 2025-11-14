@@ -5,7 +5,7 @@ import "../../styles/manualNova.css";
 
 export function DashboardManualPage() {
   // Reemplaza con tu ID de video de Google Drive
-  const videoId = "1j2eRBiv1TLuLMSl-adHelnvZ3s2q_6pM"; 
+  const videoId = "1SJf7Od2l3GY-JJolXFpxGJWqidov7Nwe"; 
 
   return (
     <main className="nova-article">

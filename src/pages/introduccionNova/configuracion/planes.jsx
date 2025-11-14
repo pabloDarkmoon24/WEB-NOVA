@@ -5,7 +5,7 @@ import "../../../styles/manualNova.css";
 
 export function PlanesPage() {
   // ID del video de Google Drive (reemplazar cuando tengas el video)
-  const videoId = "1bLuTzJbJ70mdm0ogxW8_TnQJzNBhrgXy"; 
+  const videoId = "1_ws7dxaoYEfU3cnDfKPQPRHquXJHeoAN"; 
 
   return (
     <main className="nova-article">

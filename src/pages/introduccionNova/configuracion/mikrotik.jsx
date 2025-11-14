@@ -5,7 +5,7 @@ import "../../../styles/manualNova.css";
 
 export function MikrotikPage() {
   // ID del video de Google Drive (reemplazar cuando tengas el video)
-  const videoId = "1rL4tg5oMSxn11PB4SqLie8oe2iBeffE4"; 
+  const videoId = "1Gk2d5aQXup72kPPb3Dx9iSNIS3mG4BBC"; 
 
   return (
     <main className="nova-article">

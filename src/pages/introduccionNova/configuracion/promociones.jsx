@@ -5,7 +5,7 @@ import "../../../styles/manualNova.css";
 
 export function PromocionesPage() {
   // ID del video de Google Drive (reemplazar cuando tengas el video)
-  const videoId = "1XQgp1YdPqTgmxPlOyTbinuv0II4BuBwB"; 
+  const videoId = "1nUAyXx0BTdOBhxyq2lUr6L9Y7sWiK7mF"; 
 
   return (
     <main className="nova-article">
